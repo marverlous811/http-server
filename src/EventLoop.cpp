@@ -48,7 +48,7 @@ int EventLoop::run(){
     return 1;
 }
 
-EventLoop& EventLoop::add_event(Event *event, int filter){
+EventLoop& EventLoop::add_event(Event *event, int filter, int flags){
     struct kevent *e;
     
     event->el = this;
@@ -68,7 +68,7 @@ EventLoop& EventLoop::add_event(Event *event, int filter){
     
     e->ident = event->fd;
     e->filter = filter;
-    e->flags = EV_ADD | EV_ENABLE;
+    e->flags = flags;
     e->fflags = 0;
     e->data = 0;
     e->udata = event;

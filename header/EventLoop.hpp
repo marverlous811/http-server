@@ -17,7 +17,7 @@ public:
     EventLoop();
     int run();
     
-    EventLoop& add_event(Event *event, int filter);
+    EventLoop& add_event(Event *event, int filter, int flags);
     
 private:
     struct kevent *events;
