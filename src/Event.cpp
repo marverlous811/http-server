@@ -7,5 +7,14 @@
 //
 
 #include "../header/Event.hpp"
+#include <unistd.h>
 
 Event::Event(int fd) : fd(fd){}
+
+void Event::onClose(){
+    close_fd();
+}
+
+void Event::close_fd(){
+    close(this->fd);
+}

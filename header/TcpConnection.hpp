@@ -17,6 +17,9 @@
 class TcpConnection : public Event{
 private:
     char *buffer;
+    void* msg_alloc(size_t &size);
+    void msg_free(const void *ptr);
+    void parse( char **data, size_t size, size_t rese );
 protected:
     void onRead() override;
     void onWrite() override;
@@ -25,8 +28,12 @@ protected:
 public:
     TcpConnection(int fd);
     void sendData(char* buffer);
+    void send(char **data, size_t size, size_t rese = 0);
     CB_parser f_parse;
     CB_send f_send;
+    
+    unsigned inp_buffer_size;
+    char *inp_buffer;
 };
 
 #endif /* TcpConnection_hpp */

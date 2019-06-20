@@ -41,7 +41,7 @@ int main(int argc, const char * argv[]) {
             
             Response *res = new Response();
             char *data = res->res();
-            self->sendData(data);
+            self->send(&data, strlen(data));
         };
         conn->f_send = [](TcpConnection *self, int fd){
         };

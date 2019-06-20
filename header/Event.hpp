@@ -16,6 +16,8 @@ protected:
     int fd;
     virtual void onRead() = 0;
     virtual void onWrite() = 0;
+    void onClose();
+    void close_fd();
     
     friend class EventLoop;
 public:
