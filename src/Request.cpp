@@ -14,6 +14,10 @@ Request::Request(char* buffer){
     this->parser(buffer);
 }
 
+Request::Request(){
+    
+}
+
 int Request::parser(char *buffer){
     //Method
     this->setMethod(buffer);

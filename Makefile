@@ -6,10 +6,10 @@ INCLUDE =
 LIBS	= -lm
 
 all: build-all
-	${CC} ${CFLAG} -o ${OUT_DIR}/exec ${OUT_DIR}/main.o ${OUT_DIR}/event.o ${OUT_DIR}/eventLoop.o ${OUT_DIR}/tcpConnection.o  ${OUT_DIR}/tcpListener.o 	${OUT_DIR}/util.o  ${OUT_DIR}/httpRequest.o ${OUT_DIR}/httpResponse.o
+	${CC} ${CFLAG} -o ${OUT_DIR}/exec ${OUT_DIR}/main.o ${OUT_DIR}/event.o ${OUT_DIR}/eventLoop.o ${OUT_DIR}/tcpConnection.o  ${OUT_DIR}/tcpListener.o 	${OUT_DIR}/util.o  ${OUT_DIR}/httpRequest.o ${OUT_DIR}/httpResponse.o ${OUT_DIR}/pooling.o ${OUT_DIR}/client.o
 
 .PHONY: tcp build-all clean
-build-all: event main eventLoop tcpConnection tcpListener util httpRequest httpResponse
+build-all: event main eventLoop tcpConnection tcpListener util httpRequest httpResponse client pooling
 
 event: 
 	${CC} ${CFLAG} -o ${OUT_DIR}/event.o -c ${SRC_DIR}/event.cpp
@@ -35,6 +35,11 @@ httpRequest:
 httpResponse: 
 	${CC} ${CFLAG} -o ${OUT_DIR}/httpResponse.o -c ${SRC_DIR}/Response.cpp
 
+client: 
+	${CC} ${CFLAG} -o ${OUT_DIR}/client.o -c ${SRC_DIR}/Client.cpp
+
+pooling: 
+	${CC} ${CFLAG} -o ${OUT_DIR}/pooling.o -c ${SRC_DIR}/ObjectPooling.cpp
 
 clean:
 	rm -f ${OUT_DIR}/*

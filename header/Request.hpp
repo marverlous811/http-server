@@ -21,10 +21,11 @@ class Request{
     char* url;
     char* version;
     char* body;
-    int parser(char *buffer);
     METHOD method;
 public:
+    Request();
     Request(char* buffer);
+    int parser(char *buffer);
     void setMethod(char *method);
     char* getMethod();
     void inspect();

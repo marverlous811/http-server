@@ -12,6 +12,7 @@
 #include "./header/TcpConnection.hpp"
 #include "./header/Request.hpp"
 #include "./header/Response.hpp"
+#include "./header/ObjectPooling.hpp"
 
 int main(int argc, const char * argv[]) {
     printf("hello world\n");
@@ -36,11 +37,9 @@ int main(int argc, const char * argv[]) {
         TcpConnection *conn = new TcpConnection(fd);
 
         conn->f_parse = [](TcpConnection *self, char *buffer){
-            Request *req = new Request(buffer);
-            req->inspect();
-            
-            Response *res = new Response();
-            char *data = res->res();
+            ObjectPooling pool = ObjectPooling::getInstance();
+            auto client = pool.getObject();
+            char* data = client->action(buffer);
             self->send(&data, strlen(data));
         };
         conn->f_send = [](TcpConnection *self, int fd){
